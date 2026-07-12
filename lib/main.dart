@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MVVM - Architecture',
-      theme: ThemeData(useMaterial3: true, primaryColor: Colors.blue),
+      theme: ThemeData(primaryColor: Colors.blue),
       initialRoute: AppRoutes.loginScreen,
       routes: AppRoutes.getRoutes(),
     );

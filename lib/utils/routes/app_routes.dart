@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_architecture_with_provider_with_restapi/view/home_screen.dart';
-import 'package:mvvm_architecture_with_provider_with_restapi/view/login_screen.dart';
+import 'package:mvvm_architecture_with_provider_with_restapi/view/screens/home_screen.dart';
+import 'package:mvvm_architecture_with_provider_with_restapi/view/screens/login_screen.dart';
 
 class AppRoutes {
   static const loginScreen = "/loginScreen";
