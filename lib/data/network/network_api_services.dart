@@ -29,7 +29,11 @@ class NetworkApiServices extends BaseApiServices {
     try {
       Response response = await post(
         Uri.parse(url),
-        body: data,
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'reqres_def3064641934467b89076447d2dc310',
+        },
+        body: jsonEncode(data),
       ).timeout(Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {

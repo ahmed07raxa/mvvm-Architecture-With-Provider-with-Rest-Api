@@ -5,14 +5,14 @@ import 'package:mvvm_architecture_with_provider_with_restapi/utils/utils.dart';
 import 'package:mvvm_architecture_with_provider_with_restapi/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
-      appBar: AppBar(title: Text('LOGIN'), centerTitle: true),
+      appBar: AppBar(title: Text('SIGN UP'), centerTitle: true),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: height * .085),
               RoundButton(
-                text: "Login",
+                text: "Sign Up",
                 loading: authViewModel.loading,
                 onTap: () {
                   if (_emailController.text.isEmpty) {
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Please enter password",
                       context,
                     );
-                  } else if (_passwordController.text.length < 8) {
+                  } else if (_passwordController.text.length < 6) {
                     Utils.flushBarErrorMessage(
                       "Please enter 8 digits password",
                       context,
@@ -101,16 +101,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       'email': _emailController.text.toString(),
                       'password': _passwordController.text.toString(),
                     };
-                    authViewModel.loginApi(data, context);
+                    authViewModel.registerApi(data, context);
                   }
                 },
               ),
               SizedBox(height: height * .02),
               GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, AppRoutes.signUpScreen);
+                  Navigator.pushNamed(context, AppRoutes.loginScreen);
                 },
-                child: Text('Dont have an account? Sign Up'))
+                child: Text('Already have account? Login'))
             ],
           ),
         ),

@@ -11,17 +11,42 @@ class AuthViewModel with ChangeNotifier {
 
   void setLoading(bool value) {
     _loading = value;
+    notifyListeners();
   }
 
   Future<void> loginApi(dynamic data, BuildContext context) async {
+    setLoading(true);
     _myRepo
         .loginApi(data)
         .then((value) {
+          setLoading(false);
+          Utils.flushBarErrorMessage('Login Successfull', context);
           if (kDebugMode) {
             print(value.toString());
           }
         })
         .onError((error, stackTrace) {
+          setLoading(false);
+          if (kDebugMode) {
+            Utils.flushBarErrorMessage(error.toString(), context);
+            print(error.toString());
+          }
+        });
+  }
+
+  Future<void> registerApi(dynamic data, BuildContext context) async {
+    setLoading(true);
+    _myRepo
+        .loginApi(data)
+        .then((value) {
+          setLoading(false);
+          Utils.flushBarErrorMessage('Register Successfull', context);
+          if (kDebugMode) {
+            print(value.toString());
+          }
+        })
+        .onError((error, stackTrace) {
+          setLoading(false);
           if (kDebugMode) {
             Utils.flushBarErrorMessage(error.toString(), context);
             print(error.toString());
