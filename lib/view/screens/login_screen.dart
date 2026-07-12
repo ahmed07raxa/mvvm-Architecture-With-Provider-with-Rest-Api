@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_architecture_with_provider_with_restapi/resources/components/round_button.dart';
 import 'package:mvvm_architecture_with_provider_with_restapi/utils/utils.dart';
+import 'package:mvvm_architecture_with_provider_with_restapi/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(title: Text('LOGIN'), centerTitle: true),
@@ -92,7 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                     );
                   } else {
-                    Utils.flushBarErrorMessage("hit", context);
+                    Map data = {
+                      'email': _emailController.text.toString(),
+                      'password': _passwordController.text.toString(),
+                    };
+                    authViewModel.loginApi(data, context);
                   }
                 },
               ),
